@@ -11,8 +11,8 @@ from fpdf import FPDF
 from arabic_reshaper import reshape
 from bidi.algorithm import get_display
 
-APP_USER = "admin"
-APP_PASS = "1234"
+APP_USER = "gibc"
+APP_PASS = "ahmad@1984"
 
 COMPANIES = [
     {
