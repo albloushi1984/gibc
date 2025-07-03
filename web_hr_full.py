@@ -343,7 +343,7 @@ company_logo = None
 if "company_logo" not in st.session_state:
     st.session_state["company_logo"] = None
 
-tabs = st.tabs(["👥 إدارة الموظفين", "📄 خطابات وإجازات", "📝 توليد عقد عمل"])
+tabs = st.tabs(["👥 إدارة الموظفين", "📄 خطابات وإجازات", "📝 توليد عقد عمل"🏢 شهادات الشركات"])
 
 with tabs[0]:
     st.markdown("<h3 style='color:#1976d2'>إدارة جميع الموظفين</h3>", unsafe_allow_html=True)
@@ -455,3 +455,52 @@ with tabs[2]:
             st.download_button("تحميل ملف العقد", docx_file, file_name=file_name, use_container_width=True)
         else:
             st.error("يرجى إدخال جميع البيانات.")
+
+with tabs[3]:
+    st.markdown("<h3 style='color:#1976d2'>جميع الشركات - تحميل الرخصة واعتماد التوقيع</h3>", unsafe_allow_html=True)
+
+    companies_cert = [
+        {
+            "name": "شركه الخليج العالميه لتشيد المباني",
+            "license": "رخصه الخليج.pdf",
+            "attestation": "اعتماد الخليج.pdf"
+        },
+        {
+            "name": "الشركه المصريه الكويتيه لتشيد المباني",
+            "license": "رخصه المصريه.pdf",
+            "attestation": "اعتماد المصريه الكويتيه.pdf"
+        },
+        {
+            "name": "الذكاء العالي لاصلاح وصيانه الحواسيب الشخصيه والمحموله",
+            "license": "رخصه الذكاء.pdf",
+            "attestation": "اعتماد الذكاء.pdf"
+        }
+        # أضف شركات أخرى هنا بنفس الأسلوب إذا احتجت لاحقًا
+    ]
+
+    for comp in companies_cert:
+        st.markdown(f"### {comp['name']}")
+        col1, col2 = st.columns(2)
+        with col1:
+            try:
+                with open(comp["license"], "rb") as f:
+                    st.download_button(
+                        label="تحميل الرخصة",
+                        data=f,
+                        file_name=comp["license"],
+                        mime="application/pdf"
+                    )
+            except FileNotFoundError:
+                st.warning("ملف الرخصة غير موجود.")
+        with col2:
+            try:
+                with open(comp["attestation"], "rb") as f:
+                    st.download_button(
+                        label="تحميل اعتماد التوقيع",
+                        data=f,
+                        file_name=comp["attestation"],
+                        mime="application/pdf"
+                    )
+            except FileNotFoundError:
+                st.warning("ملف الاعتماد غير موجود.")
+        st.markdown("---")
