@@ -1,0 +1,6 @@
+streamlit
+pandas
+python-docx
+fpdf
+arabic_reshaper
+python-bidi
